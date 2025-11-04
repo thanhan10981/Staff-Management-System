@@ -1,0 +1,313 @@
+.dashboard {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  /* --- Top Stats --- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+
+    .card {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .value {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .label {
+        color: #6b7280;
+        margin-bottom: 4px;
+      }
+
+      .change {
+        font-size: 12px;
+        color: #9ca3af;
+      }
+
+      .icon {
+        position: absolute;
+        top: 14px;
+        right: 16px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 8px;
+        i {
+          font-size: 20px;
+          color: #fff;
+        }
+      }
+
+      &.success {
+        background: linear-gradient(135deg, #4ade80, #22c55e);
+        color: white;
+      }
+
+      &.info {
+        background: linear-gradient(135deg, #60a5fa, #2563eb);
+        color: white;
+      }
+
+      &.warning {
+        background: linear-gradient(135deg, #facc15, #f59e0b);
+        color: white;
+      }
+
+      &.danger {
+        background: linear-gradient(135deg, #f87171, #ef4444);
+        color: white;
+      }
+    }
+  }
+
+  /* --- Chart + Quick Actions --- */
+  .chart-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .chart-card {
+      flex: 2;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .chart-placeholder {
+        background: #f9fafb;
+        border-radius: 6px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #9ca3af;
+      }
+
+      .filter {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+
+        button {
+          border: none;
+          background: #f3f4f6;
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 13px;
+          cursor: pointer;
+          color: #374151;
+
+          &.active {
+            background: #2563eb;
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .quick-actions {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .btn {
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+
+        .icon-quick-action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          border-radius: 6px;
+          background: rgba(255, 255, 255, 0.25);
+          transition: all 0.2s ease;
+
+          i {
+            font-size: 16px;
+            color: #fff;
+          }
+        }
+
+        &.blue {
+          background: linear-gradient(135deg, #3b82f6, #2563eb);
+          &:hover {
+            background: #1d4ed8;
+          }
+        }
+
+        &.green {
+          background: linear-gradient(135deg, #22c55e, #15803d);
+          &:hover {
+            background: #166534;
+          }
+        }
+
+        &.orange {
+          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          &:hover {
+            background: #d97706;
+          }
+        }
+
+        &.purple {
+          background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+          &:hover {
+            background: #6d28d9;
+          }
+        }
+
+        &:hover .icon-quick-action {
+          transform: scale(1.1);
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  /* --- Info Section --- */
+  .info-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+
+    .activities,
+    .schedule {
+      flex: 1;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 8px 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          margin-bottom: 8px;
+          color: #374151;
+
+          i {
+            font-size: 16px;
+            color: #2563eb;
+          }
+        }
+      }
+
+      a {
+        font-size: 13px;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+      }
+    }
+  }
+
+  /* --- Notification Center --- */
+  .notification-center {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e5e7eb;
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .alert {
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #111827;
+
+      i {
+        font-size: 18px;
+      }
+
+      &.yellow {
+        background: #fef9c3;
+        border-left: 4px solid #facc15;
+        i {
+          color: #eab308;
+        }
+      }
+
+      &.red {
+        background: #fee2e2;
+        border-left: 4px solid #ef4444;
+        i {
+          color: #dc2626;
+        }
+      }
+
+      &.blue {
+        background: #dbeafe;
+        border-left: 4px solid #2563eb;
+        i {
+          color: #2563eb;
+        }
+      }
+    }
+  }
+}
