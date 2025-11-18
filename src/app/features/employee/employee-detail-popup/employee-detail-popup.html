@@ -86,11 +86,13 @@
 
 <app-employee-salary-popup
   *ngIf="showSalaryPopup"
+  [employeeId]="+employee.maNhanVien"
   (closeAll)="closeAllPopup($event)">
 </app-employee-salary-popup>
 
+
 <app-employee-audit-popup
   *ngIf="showAuditPopup"
+  [employeeId]="+employee.maNhanVien"
   (closeAll)="closeAllPopup($event)">
 </app-employee-audit-popup>
-

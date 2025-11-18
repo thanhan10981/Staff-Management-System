@@ -27,23 +27,22 @@
         <!-- Cột trái -->
         <div class="column">
           <h4>Lương & Phụ cấp</h4>
-          <div class="row"><span>Lương cơ bản:</span> <b>{{ salary.base | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp trực ca:</span> <b>{{ salary.shift | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp phẫu thuật/thủ thuật:</span> <b>{{ salary.surgery | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp độc hại/nguy hiểm:</span> <b>{{ salary.hazard | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp ăn ca:</span> <b>{{ salary.meal | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp khác:</span> <b>{{ salary.other | number }} VND</b></div>
-          <div class="row"><span>Phụ cấp trực lễ / tết:</span> <b>{{ salary.holiday | number }} VND</b></div>
+          <div class="row"><span>Lương cơ bản:</span> <b>{{ salary.luongCoBan   | number }} VND</b></div>
+          <div class="row"><span>Phụ cấp trực ca:</span> <b>{{ salary.phuCapTrucCa  | number }} VND</b></div>
+          <div class="row"><span>Phụ cấp phẫu thuật/thủ thuật:</span> <b>{{ salary.phuCapPhauThuat | number }} VND</b></div>
+          <div class="row"><span>Phụ cấp độc hại/nguy hiểm:</span> <b>{{ salary.phuCapDocHai| number }} VND</b></div>
+          <div class="row"><span>Phụ cấp ăn ca:</span> <b>{{ salary.phuCapAnCa  | number }} VND</b></div>
+          <div class="row"><span>Phụ cấp khác:</span> <b>{{ salary.phuCapKhac | number }} VND</b></div>
+          <div class="row"><span>Phụ cấp trực lễ / tết:</span> <b>{{ salary.phuCapLeTet | number }} VND</b></div>
         </div>
 
         <!-- Cột phải -->
         <div class="column">
           <h4>Lương tháng gần nhất</h4>
-          <div class="row"><span>Tổng thu nhập:</span> <b>{{ summary.total | number }} VND</b></div>
-          <div class="row"><span>Thuế TNCN:</span> <b>{{ summary.tax | number }} VND</b></div>
-          <div class="row"><span>BHXH, BHYT, BHTN:</span> <b>{{ summary.insurance | number }} VND</b></div>
-          <div class="row"><span>Khấu trừ khác:</span> <b>{{ summary.deduction | number }} VND</b></div>
-          <div class="row total"><span>Thực lãnh:</span> <b>{{ summary.net | number }} VND</b></div>
+          <div class="row"><span>Tổng thu nhập:</span> <b>{{ salary.tongThuNhap | number }} VND</b></div>
+          <div class="row"><span>Thuế TNCN:</span> <b>{{ salary.thueTncn  | number }} VND</b></div>
+          <div class="row"><span>BHXH, BHYT, BHTN:</span> <b>{{ salary.bhxh   | number }} VND</b></div>
+          <div class="row total"><span>Thực lãnh:</span> <b>{{ salary.thucLanh | number }} VND</b></div>
         </div>
       </div>
     </div>

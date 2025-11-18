@@ -29,13 +29,13 @@
       <div class="log-list">
         <div class="log-card" *ngFor="let log of logs">
           <div class="log-left">
-            <p class="title">{{ log.action }}</p>
-            <p class="detail">{{ log.detail }}</p>
+            <p class="title">{{ log.hanhDong }}</p>
+            <p class="detail">{{ log.moTa }}</p>
           </div>
           <div class="log-right">
-            <span class="date">{{ log.date }}</span>
-            <span class="time">{{ log.time }}</span>
-            <span class="user">{{ log.user }}</span>
+            <span class="date">{{ log.thoiGian | date:'dd/MM/yyyy' }}</span>
+            <span class="time">{{ log.thoiGian | date:'HH:mm' }}</span>
+            <span class="user">{{ log.tenNguoiThucHien }}</span>
           </div>
         </div>
       </div>

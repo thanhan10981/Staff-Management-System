@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonTabs } from "../common-tabs/common-tabs";
+import { SalaryService } from '../../../service/salary.service';
 
 @Component({
   selector: 'app-employee-salary-popup',
@@ -10,10 +11,26 @@ import { CommonTabs } from "../common-tabs/common-tabs";
   styleUrls: ['./employee-salary-popup.scss']
 })
 export class EmployeeSalaryPopup {
+  @Input() employeeId!: number;
   @Output() close = new EventEmitter<void>();
   @Output() closeAll = new EventEmitter<string>();
 
+   constructor(private salaryService: SalaryService) {}
+
   activeTab = 'salary';
+  salary: any = {};
+  
+
+  ngOnInit() {
+    this.loadSalary();
+  }
+
+  loadSalary() {
+  this.salaryService.getSalaryByEmployeeId(this.employeeId).subscribe(data => {
+    this.salary = data;   
+    console.log("Salary loaded:", data);
+  });
+}
 
   tabList = [
     { label: 'Thông tin cá nhân', id: 'personal' },
@@ -26,7 +43,7 @@ export class EmployeeSalaryPopup {
 
   onTabChange(tabId: string) {
     this.activeTab = tabId;
-    console.log('🟦 [Salary] Tab changed to:', tabId);
+    console.log(' [Salary] Tab changed to:', tabId);
 
     if (tabId === 'personal') this.closeAll.emit('employee');
     if (tabId === 'certificate') this.closeAll.emit('certificate');
@@ -38,21 +55,7 @@ export class EmployeeSalaryPopup {
     this.closeAll.emit(target);
   }
 
-  salary = {
-    base: 15000000,
-    shift: 5000000,
-    surgery: 3500000,
-    hazard: 1000000,
-    meal: 1200000,
-    other: 500000,
-    holiday: 2000000
-  };
+  
 
-  summary = {
-    total: 28200000,
-    tax: 1500000,
-    insurance: 2440000,
-    deduction: 0,
-    net: 23625000
-  };
+  
 }

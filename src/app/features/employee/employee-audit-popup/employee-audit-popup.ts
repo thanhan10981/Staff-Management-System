@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonTabs } from "../common-tabs/common-tabs";
+import { AuditLogService } from '../../../service/audit-log.service';
 
 @Component({
   selector: 'app-employee-audit-popup',
@@ -10,8 +11,24 @@ import { CommonTabs } from "../common-tabs/common-tabs";
   styleUrls: ['./employee-audit-popup.scss']
 })
 export class EmployeeAuditPopup {
+  @Input() employeeId!: number;
   @Output() close = new EventEmitter<void>();
   @Output() closeAll = new EventEmitter<string>();
+
+  logs: any[] = [];
+
+  constructor(private auditService: AuditLogService) {}
+
+  ngOnInit() {
+    this.loadLogs();
+  }
+
+  loadLogs() {
+  this.auditService.getLogsByEmployee(this.employeeId)
+    .subscribe(data => {
+      this.logs = data;   
+    });
+}
 
   activeTab = 'audit';
 
@@ -39,28 +56,5 @@ export class EmployeeAuditPopup {
     this.closeAll.emit(target);
   }
 
-  // 🧾 Dữ liệu nhật ký thay đổi
-  logs = [
-    {
-      action: 'Cập nhật Chứng chỉ hành nghề',
-      detail: 'Thêm chứng chỉ Chuyên khoa I – Nội tổng quát',
-      date: '10/12/2025',
-      time: '14:30',
-      user: 'Nguyễn Văn Admin'
-    },
-    {
-      action: 'Cập nhật Chứng chỉ hành nghề',
-      detail: 'Thêm chứng chỉ Chuyên khoa I – Nội tổng quát',
-      date: '10/12/2025',
-      time: '12:30',
-      user: 'Nguyễn Văn Admin'
-    },
-    {
-      action: 'Cập nhật Chứng chỉ hành nghề',
-      detail: 'Thêm chứng chỉ Chuyên khoa I – Nội tổng quát',
-      date: '10/12/2025',
-      time: '11:30',
-      user: 'Nguyễn Văn Admin'
-    }
-  ];
+  
 }
