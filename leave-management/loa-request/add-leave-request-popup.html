@@ -1,0 +1,50 @@
+<div class="popup-overlay">
+  <div class="popup">
+    <h2>Thêm yêu cầu nghỉ phép</h2>
+
+   <div class="form-group">
+  <label>Nhân viên</label>
+  <select [(ngModel)]="leaveRequest.employeeId">
+    <option value="">-- Chọn nhân viên --</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label>Phòng ban</label>
+  <select [(ngModel)]="leaveRequest.departmentId">
+    <option value="">-- Chọn phòng ban --</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label>Từ ngày</label>
+  <input type="date" [(ngModel)]="leaveRequest.startDate">
+</div>
+
+<div class="form-group">
+  <label>Đến ngày</label>
+  <input type="date" [(ngModel)]="leaveRequest.endDate">
+</div>
+
+<div class="form-group">
+  <label>Loại nghỉ</label>
+  <select [(ngModel)]="leaveRequest.type">
+    <option>Phép năm</option>
+    <option>Nghỉ ốm</option>
+    <option>Nghỉ không lương</option>
+    <option>Thai sản</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label>Lý do</label>
+  <textarea [(ngModel)]="leaveRequest.reason"></textarea>
+</div>
+
+
+    <div class="button-group">
+      <button class="btn cancel" (click)="closePopup()">Hủy</button>
+      <button class="btn submit" (click)="submitForm()">Gửi yêu cầu</button>
+    </div>
+  </div>
+</div>

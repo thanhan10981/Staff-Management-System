@@ -1,0 +1,157 @@
+<div class="shift-swap">
+  <h2 class="title">Quản lý yêu cầu đổi ca</h2>
+
+  <!-- TOP: Thống kê -->
+  <div class="stats">
+    <div class="card success">
+      <div class="value">248</div>
+      <div class="label">Tổng số yêu cầu</div>
+      <div class="icon"><i class="ri-exchange-fill"></i></div>
+    </div>
+
+    <div class="card info">
+      <div class="value">235</div>
+      <div class="label">Đã duyệt</div>
+      <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
+    </div>
+
+    <div class="card remove">
+      <div class="value">8</div>
+      <div class="label">Chờ duyệt</div>
+      <div class="icon"><i class="ri-time-fill"></i></div>
+    </div>
+
+    <div class="card add">
+      <div class="value">12</div>
+      <div class="label">Bị từ chối</div>
+      <div class="icon"><i class="ri-close-circle-fill"></i></div>
+    </div>
+  </div>
+
+  <!-- Bộ lọc -->
+  <div class="filter-wrapper">
+    <div class="filter-section">
+      <div class="filters">
+
+        <div class="search-box">
+          <i class="ri-search-line"></i>
+          <input type="text" placeholder="Tìm kiếm theo tên nhân viên, mã NV, phòng ban">
+        </div>
+
+        <select>
+          <option value="">Tất cả chuyên khoa</option>
+          <option>Nội tổng hợp</option>
+          <option>Hồi sức cấp cứu</option>
+          <option>Khoa dược</option>
+          <option>Ngoại khoa</option>
+        </select>
+
+        <select>
+          <option>Tất cả ca</option>
+          <option>Ca sáng</option>
+          <option>Ca chiều</option>
+          <option>Ca tối</option>
+        </select>
+
+        <select>
+          <option>Tất cả trạng thái</option>
+          <option>Đã duyệt</option>
+          <option>Chờ duyệt</option>
+          <option>Bị từ chối</option>
+        </select>
+
+        <div class="add-employee-wrapper">
+          <button class="btn-primary" (click)="toggleAddMenu()">
+            <i class="ri-add-fill"></i> Thêm yêu cầu đổi ca
+          </button>
+
+          <div class="add-menu" [class.show]="isAddMenuVisible">
+            <div class="add-option manual" (click)="openAddPopup('manual')">
+              Nhập thủ công
+            </div>
+
+            <div class="add-option excel">
+              <label for="excelInput">Nhập từ Excel</label>
+              <input id="excelInput" type="file" accept=".xlsx,.xls,.csv">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="employee-table">
+    <div class="table-header">
+      <h3>Danh sách yêu cầu đổi ca <span>(20 yêu cầu)</span></h3>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>Nhân viên yêu cầu</th>
+          <th>Nhân viên đổi</th>
+          <th>Ca đổi</th>
+          <th>Ngày đổi</th>
+          <th>Phòng ban</th>
+          <th>Lý do</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- row mẫu -->
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>
+            <div class="employee-info">
+              <div class="avatar blue">NT</div>
+              <div class="details">
+                <p class="name">Nguyễn Thị Lan</p>
+                <span>Mã NV: EMP001</span>
+              </div>
+            </div>
+          </td>
+
+          <td>Lê Văn Hùng<br><span>EMP002</span></td>
+
+          <td>Ca sáng → Ca chiều</td>
+          <td>2024-01-20</td>
+          <td>Khoa Nội tổng hợp</td>
+          <td>Có việc gia đình</td>
+          <td><span class="status pending">Chờ duyệt</span></td>
+
+          <td class="action-cell">
+            <div class="action-wrapper">
+              <i class="ri-more-2-line action-icon" (click)="toggleMenu(1)"></i>
+
+              <div class="action-menu" [class.show]="activeMenu === 1">
+                <div class="menu-item view"><i class="ri-eye-fill"></i> Xem chi tiết</div>
+                <div class="menu-item edit"><i class="ri-pencil-fill"></i> Cập nhật</div>
+                <div class="menu-item delete"><i class="ri-delete-bin-fill"></i> Xóa</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="table-footer">
+      <p>Hiển thị 1–10 trong tổng số 20 yêu cầu</p>
+      <div class="pagination">
+        <button>Trước</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>...</button>
+        <button>25</button>
+        <button>Tiếp</button>
+      </div>
+    </div>
+
+  </div>
+</div>

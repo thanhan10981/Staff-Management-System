@@ -1,0 +1,175 @@
+<div class="leave-requests">
+  <h2 class="title">Quản lý yêu cầu nghỉ phép</h2>
+
+  <!-- TOP: Thống kê -->
+  <div class="stats">
+    <div class="card success">
+      <div class="value">248</div>
+      <div class="label">Tổng số yêu cầu</div>
+      <div class="icon"><i class="ri-team-fill"></i></div>
+    </div>
+
+    <div class="card info">
+      <div class="value">235</div>
+      <div class="label">Đã duyệt</div>
+      <div class="icon"><i class="ri-checkbox-circle-fill"></i></div>
+    </div>
+
+    <div class="card remove">
+      <div class="value">8</div>
+      <div class="label">Chờ duyệt</div>
+      <div class="icon"><i class="ri-time-fill"></i></div>
+    </div>
+
+    <div class="card add">
+      <div class="value">12</div>
+      <div class="label">Từ chối</div>
+      <div class="icon"><i class="ri-close-circle-fill"></i></div>
+    </div>
+  </div>
+
+  <!-- Bộ lọc -->
+  <div class="filter-wrapper">
+    <div class="filter-section">
+      <div class="filters">
+
+        <div class="search-box">
+          <i class="ri-search-line"></i>
+          <input 
+            type="text" 
+            placeholder="Tìm kiếm theo tên, mã nhân viên, mã khoa"
+            [(ngModel)]="searchText"
+            (input)="applyFilter()">
+        </div>
+
+        <select>
+          <option value="">Tất cả chuyên khoa</option>
+          <option>Nội tổng hợp</option>
+          <option>Hồi sức cấp cứu</option>
+          <option>Khoa dược</option>
+          <option>Ngoại khoa</option>
+        </select>
+
+        <select>
+          <option>Tất cả thời gian</option>
+          <option>Hôm nay</option>
+          <option>Tuần này</option>
+          <option>Tháng này</option>
+        </select>
+
+        <select>
+          <option>Tất cả trạng thái</option>
+          <option>Đang làm việc</option>
+          <option>Tạm nghỉ</option>
+          <option>Nghỉ việc</option>
+        </select>
+
+        <div class="add-employee-wrapper">
+          <button class="btn-primary" (click)="toggleAddMenu()">
+            <i class="ri-add-fill"></i> Thêm yêu cầu
+          </button>
+
+          <div class="add-menu" [class.show]="isAddMenuVisible">
+            <div class="add-option manual" (click)="openAddPopup('manual')">
+              Nhập thủ công
+            </div>
+
+            <div class="add-option excel">
+              <label for="excelInput">Nhập từ Excel</label>
+              <input id="excelInput" type="file" accept=".xlsx,.xls,.csv">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="employee-table">
+    <div class="table-header">
+      <h3>Danh sách yêu cầu nghỉ phép <span>({{ filteredEmployees.length }} yêu cầu)</span></h3>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>Nhân viên</th>
+          <th>Mã NV</th>
+          <th>Ngày nghỉ</th>
+          <th>Phòng ban</th>
+          <th>Loại nghỉ</th>
+          <th>Lý do</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of filteredEmployees; let i = index">
+          <td><input type="checkbox"></td>
+
+          <td>
+            <div class="employee-info">
+              <div class="avatar">{{ getInitials(emp.tenNhanVien) }}</div>
+              <div class="details">
+                <p class="name">{{ emp.tenNhanVien }}</p>
+                <span>Ngày vào: {{ emp.ngayVaoLam }}</span>
+              </div>
+            </div>
+          </td>
+
+          <td>{{ emp.maNhanVien }}</td>
+          <td>{{ emp.ngayVaoLam }}</td>
+          <td>{{ emp.tenKhoa || emp.tenPhongBan }}</td>
+
+          <td>Nghỉ phép</td>
+          <td>—</td>
+
+          <td>
+            <span [ngClass]="getStatusClass(emp.trangThai)">
+              {{ emp.trangThai }}
+            </span>
+          </td>
+
+          <td class="action-cell">
+            <div class="action-wrapper">
+              <i class="ri-more-2-line action-icon" (click)="toggleMenu(i)"></i>
+
+              <div class="action-menu" [class.show]="activeMenu === i">
+                <div class="menu-item view" (click)="openDetailPopup(emp)">
+                  <i class="ri-eye-fill"></i> Xem chi tiết
+                </div>
+                <div class="menu-item edit" (click)="updateEmployee(emp)">
+                  <i class="ri-pencil-fill"></i> Cập nhật
+                </div>
+                <div class="menu-item delete" (click)="deleteEmployee(emp)">
+                  <i class="ri-delete-bin-fill"></i> Xóa
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Popup chi tiết nhân viên -->
+    <app-employee-detail-popup 
+      *ngIf="showDetailPopup"
+      (close)="closeDetailPopup()">
+    </app-employee-detail-popup>
+
+    <!-- Popup thêm yêu cầu -->
+    <app-add-leave-request-popup
+      *ngIf="showAddPopup"
+      (close)="closeAddPopup()"
+      (submit)="submitLeaveRequest($event)">
+    </app-add-leave-request-popup>
+
+    <div class="table-footer">
+      <p>Hiển thị {{ filteredEmployees.length }} yêu cầu</p>
+    </div>
+
+  </div>
+</div>
