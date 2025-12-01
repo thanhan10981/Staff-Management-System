@@ -1,0 +1,63 @@
+<div class="container">
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Danh sách yêu cầu chờ duyệt</h2>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <div class="filter-item">
+      <label for="filterType">Loại yêu cầu</label>
+      <select id="filterType" [(ngModel)]="filterType">
+        <option value="">Tất cả</option>
+        <option value="leave">Nghỉ phép</option>
+        <option value="shift-swap">Đổi ca</option>
+      </select>
+    </div>
+
+    <div class="filter-item">
+      <label for="filterDate">Ngày</label>
+      <input type="date" id="filterDate" [(ngModel)]="filterDate" />
+    </div>
+
+    <button class="filter-btn" (click)="applyFilter()">Lọc</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Nhân viên</th>
+          <th>Loại yêu cầu</th>
+          <th>Ngày</th>
+          <th>Ca làm</th>
+          <th>Lý do</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let req of pendingRequests">
+          <td>{{ req.employee }}</td>
+          <td>
+            <span class="tag"
+              [class.leave]="req.type === 'leave'"
+              [class.swap]="req.type === 'shift-swap'">
+              {{ req.type === 'leave' ? 'Nghỉ phép' : 'Đổi ca' }}
+            </span>
+          </td>
+          <td>{{ req.date }}</td>
+          <td>{{ req.shift }}</td>
+          <td>{{ req.reason }}</td>
+
+          <td class="actions">
+            <button class="approve" (click)="approve(req)">Duyệt</button>
+            <button class="deny" (click)="deny(req)">Từ chối</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
